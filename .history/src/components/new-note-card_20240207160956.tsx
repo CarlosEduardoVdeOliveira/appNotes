@@ -1,33 +1,16 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import {formatDistanceToNow} from 'date-fns'
-import {ptBR} from 'date-fns/locale'
 import {X} from 'lucide-react'
 
-interface NoteCardProps{
-  note: {
-    date: Date,
-    content: String
-  }
-}
-
-export function NoteCard({note}:NoteCardProps) {
+export function NewNoteCard(){
   return(
     <Dialog.Root>
       <Dialog.Trigger className="
-        rounded-md bg-slate-800 p-5 flex flex-col gap-3 overflow-hidden 
-        relative hover:ring-2 ring-slate-600 text-left outline-none 
+        rounded-md bg-slate-700 p-5 flex flex-col text-left gap-3
+        hover:ring-2 ring-slate-600 text-left outline-none 
         focus-visible:ring-2 focus-visible:ring-lime-400
       ">
-        <span className='text-sm font-medium text-slate-300'>
-        {formatDistanceToNow(note.date, {locale: ptBR, addSuffix: true})}
-        </span>
-        <p className='text-sm leading-6 text-slate-400'>
-          {note.content}
-        </p>
-        <div className='
-          absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60
-          to-black/8 pointer-events-none'
-        />
+        <span className='text-sm font-medium text-slate-200'>Adicionar nota</span>
+        <p className='text-sm leading-6 text-slate-400'>Grave uma nota em áudio que será convertida para texto automaticamente.</p>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className='inset-0 fixed bg-black/50' />
@@ -44,20 +27,21 @@ export function NoteCard({note}:NoteCardProps) {
           </Dialog.Close>
           <div className='flex flex-1 flex-col gap-3 p-5'>
             <span className='text-sm font-medium text-slate-300'>
-              {formatDistanceToNow(note.date, {locale: ptBR, addSuffix: true})}
+              Adicionar nota
             </span>
             <p className='text-sm leading-6 text-slate-400'>
-              {note.content}
+              Comece <button className='text-lime-400 font-medium hover:underline'>gravando uma nota</button> em áudio ou se preferir <button className='text-lime-400 font-medium hover:underline'>utilize apenas texto.</button>
             </p>
           </div>
           <button type='button' className='
-            w-full bg-slate-800 py-4 text-center text-sm text-slate-300
-            outline-none font-medium group
+            w-full bg-lime-400 py-4 text-center text-sm text-lime-950
+            outline-none font-medium hover:bg-lime-500
           '>
-            Deseja <span className='text-red-400 group-hover:underline'> apagar nota</span>?
+            Salvar nota
           </button>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
+    
   );
 }

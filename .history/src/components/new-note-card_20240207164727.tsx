@@ -15,8 +15,6 @@ export function NewNoteCard(){
   }
   function handleSaveNote(event: FormEvent){
     event.preventDefault()
-    console.log(content);
-    
     toast.success('Nota salva com sucesso!')
   }
   return(

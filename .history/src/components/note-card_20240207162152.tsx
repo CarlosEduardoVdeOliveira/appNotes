@@ -11,6 +11,7 @@ interface NoteCardProps{
 }
 
 export function NoteCard({note}:NoteCardProps) {
+  const [shouldShowOnboarding, setShouldShowOnboarnig] = useState(true)
   return(
     <Dialog.Root>
       <Dialog.Trigger className="

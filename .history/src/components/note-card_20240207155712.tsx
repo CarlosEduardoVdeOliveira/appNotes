@@ -37,10 +37,9 @@ export function NoteCard({note}:NoteCardProps) {
           outline-none overflow-hidden h-[60vh]
         '>
           <Dialog.Close className='
-            right-0 top-0 absolute bg-slate-800 p-1.5 text-slate-400 
-            hover:text-slate-100
+            right-0 top-0 absolute bg-slate-800 p-1.5 text-slate-400
           '>
-            <X className='size-5' />
+            <X className='size-5 hover:text-slate-300' />
           </Dialog.Close>
           <div className='flex flex-1 flex-col gap-3 p-5'>
             <span className='text-sm font-medium text-slate-300'>

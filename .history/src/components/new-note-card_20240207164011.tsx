@@ -1,23 +1,17 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import {X} from 'lucide-react'
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { toast } from 'sonner';
+import { ChangeEvent, useState } from 'react';
 
 export function NewNoteCard(){
   const [shouldShowOnboarding, setShouldShowOnboarnig] = useState(true)
-  const [content, setContent] = useState('')
   function handleStartEditor(){
     setShouldShowOnboarnig(false)
   }
   function handleContentChange(event: ChangeEvent<HTMLTextAreaElement>){
-    setContent(event.target.value)
     if(event.target.value === "") setShouldShowOnboarnig(true)
   }
-  function handleSaveNote(event: FormEvent){
-    event.preventDefault()
-    console.log(content);
-    
-    toast.success('Nota salva com sucesso!')
+  function handleSaveNote(){
+
   }
   return(
     <Dialog.Root>
@@ -64,7 +58,7 @@ export function NewNoteCard(){
                 )
               }
             </div>
-            <button type='submit' className='
+            <button type='button' className='
               w-full bg-lime-400 py-4 text-center text-sm text-lime-950
               outline-none font-medium hover:bg-lime-500
             '>

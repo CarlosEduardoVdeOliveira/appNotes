@@ -1,7 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import {formatDistanceToNow} from 'date-fns'
 import {ptBR} from 'date-fns/locale'
-import {X} from 'lucide-react'
 
 interface NoteCardProps{
   note: {
@@ -36,12 +35,6 @@ export function NoteCard({note}:NoteCardProps) {
           bg-slate-700 max-w-[650px] w-full flex flex-col rounded-md 
           outline-none overflow-hidden h-[60vh]
         '>
-          <Dialog.Close className='
-            right-0 top-0 absolute bg-slate-800 p-1.5 text-slate-400 
-            hover:text-slate-100
-          '>
-            <X className='size-5' />
-          </Dialog.Close>
           <div className='flex flex-1 flex-col gap-3 p-5'>
             <span className='text-sm font-medium text-slate-300'>
               {formatDistanceToNow(note.date, {locale: ptBR, addSuffix: true})}
@@ -54,7 +47,7 @@ export function NoteCard({note}:NoteCardProps) {
             w-full bg-slate-800 py-4 text-center text-sm text-slate-300
             outline-none font-medium group
           '>
-            Deseja <span className='text-red-400 group-hover:underline'> apagar nota</span>?
+            Deseja <span className='text-red-400 group-hover:underline'>apagar nota</span>?
           </button>
         </Dialog.Content>
       </Dialog.Portal>
