@@ -1,6 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import {formatDistanceToNow} from 'date-fns'
-import {ptBR} from 'date-fns/locale'
+import {id, ptBR} from 'date-fns/locale'
 import {X} from 'lucide-react'
 
 interface NoteCardProps{
@@ -54,7 +54,7 @@ export function NoteCard({note, onNoteDelete}:NoteCardProps) {
           </div>
           <button 
             type='button'
-            onClick={() => onNoteDelete(note.id)}
+            onClick={() => onNoteDelete(id)}
             className='
               w-full bg-slate-800 py-4 text-center text-sm text-slate-300
               outline-none font-medium group

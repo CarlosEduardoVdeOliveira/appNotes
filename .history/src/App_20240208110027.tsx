@@ -2,7 +2,6 @@ import logo from './assets/logo-nlw-expert.svg'
 import { NoteCard } from './components/note-card'
 import { NewNoteCard } from './components/new-note-card'
 import { ChangeEvent, useState } from 'react'
-import { toast } from 'sonner'
 
 interface Note{
   id: string,
@@ -33,7 +32,6 @@ export function App() {
   function onNoteDelete(id: string){
     const notesArray = notes.filter(note => note.id !== id)
     setNotes(notesArray)
-    toast.success('Nota apagada com sucesso!')
     localStorage.setItem('notes', JSON.stringify(notesArray))
   }
 
@@ -52,8 +50,8 @@ export function App() {
     <div className='mx-auto max-w-6xl my-12 space-y-6 px-5'>
       <img src={logo} alt="Logo nlw expert" />
       <form className="w-full">
-        <input
-          type="text"
+        <input 
+          type="text" 
           placeholder='Busque em suas notas...'
           className='w-full bg-transparent text-3xl font-semibold tracking-tight
           placeholder:text-slate-500 outline-none'
