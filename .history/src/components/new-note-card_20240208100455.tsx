@@ -5,7 +5,6 @@ import { toast } from 'sonner';
 interface newNoteCardProps{
   onNoteCreated: (content: string) => void
 }
-let speedRecognition: SpeechRecognition | null = null
 export function NewNoteCard({onNoteCreated}: newNoteCardProps){
   const [shouldShowOnboarding, setShouldShowOnboarnig] = useState(true)
   const [isRecording, setIsRecording] = useState(false)
@@ -21,49 +20,19 @@ export function NewNoteCard({onNoteCreated}: newNoteCardProps){
 
   function handleSaveNote(event: FormEvent){
     event.preventDefault()
-
     if (content === '') return
-
     onNoteCreated(content);
     setContent('')
     setShouldShowOnboarnig(true)
     toast.success('Nota salva com sucesso!')
   }
-  
+
   function handleStartRecording(){
-    const isSpeechRecognitionAPIAvailable = 'SpeechRecognition' in window ||
-    'webkitSpeechRecognition' in window;
-    if(!isSpeechRecognitionAPIAvailable){ 
-      alert('Infelizmente seu navegador não suporta a API de gravação');
-      return
-    }
     setIsRecording(true)
-    setShouldShowOnboarnig(false)
-    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition
-    
-    speedRecognition = new SpeechRecognitionAPI()
-    speedRecognition.lang = 'pt-BR' || 'en-US'
-    speedRecognition.continuous = true
-    speedRecognition.maxAlternatives = 1
-    speedRecognition.interimResults = true
-    speedRecognition.onresult = (event) => {
-      const transcription = Array.from(event.results)
-        .reduce((text, result)=>{
-          return text.concat(result[0].transcript)
-        }, "")
-      setContent(transcription)
-    }
-
-    speedRecognition.onerror = (event) => console.error(event);
-    speedRecognition.start()
   }
-
 
   function handleStopRecording(){
     setIsRecording(false)
-    if (speedRecognition !== null) {
-      speedRecognition.stop()      
-    }
   }
 
   return(

@@ -35,8 +35,7 @@ export function App() {
   }
 
   const filteredNotes = search !== '' 
-    ? notes.filter(note => 
-        note.content.toLowerCase().includes(search.toLowerCase()))
+    ? notes.filter(note => note.content.toLowerCase().includes(search.toLowerCase()))
     : notes
 
 

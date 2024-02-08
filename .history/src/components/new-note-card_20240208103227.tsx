@@ -61,9 +61,7 @@ export function NewNoteCard({onNoteCreated}: newNoteCardProps){
 
   function handleStopRecording(){
     setIsRecording(false)
-    if (speedRecognition !== null) {
-      speedRecognition.stop()      
-    }
+    speedRecognition.stop()
   }
 
   return(

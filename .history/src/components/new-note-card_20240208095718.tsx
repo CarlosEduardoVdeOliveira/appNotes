@@ -5,7 +5,6 @@ import { toast } from 'sonner';
 interface newNoteCardProps{
   onNoteCreated: (content: string) => void
 }
-let speedRecognition: SpeechRecognition | null = null
 export function NewNoteCard({onNoteCreated}: newNoteCardProps){
   const [shouldShowOnboarding, setShouldShowOnboarnig] = useState(true)
   const [isRecording, setIsRecording] = useState(false)
@@ -21,50 +20,17 @@ export function NewNoteCard({onNoteCreated}: newNoteCardProps){
 
   function handleSaveNote(event: FormEvent){
     event.preventDefault()
-
-    if (content === '') return
-
     onNoteCreated(content);
     setContent('')
     setShouldShowOnboarnig(true)
     toast.success('Nota salva com sucesso!')
   }
-  
+
   function handleStartRecording(){
-    const isSpeechRecognitionAPIAvailable = 'SpeechRecognition' in window ||
-    'webkitSpeechRecognition' in window;
-    if(!isSpeechRecognitionAPIAvailable){ 
-      alert('Infelizmente seu navegador não suporta a API de gravação');
-      return
-    }
     setIsRecording(true)
-    setShouldShowOnboarnig(false)
-    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition
-    
-    speedRecognition = new SpeechRecognitionAPI()
-    speedRecognition.lang = 'pt-BR' || 'en-US'
-    speedRecognition.continuous = true
-    speedRecognition.maxAlternatives = 1
-    speedRecognition.interimResults = true
-    speedRecognition.onresult = (event) => {
-      const transcription = Array.from(event.results)
-        .reduce((text, result)=>{
-          return text.concat(result[0].transcript)
-        }, "")
-      setContent(transcription)
-    }
-
-    speedRecognition.onerror = (event) => console.error(event);
-    speedRecognition.start()
   }
 
-
-  function handleStopRecording(){
-    setIsRecording(false)
-    if (speedRecognition !== null) {
-      speedRecognition.stop()      
-    }
-  }
+  function handleStopRecording(){}
 
   return(
     <Dialog.Root>
@@ -89,7 +55,7 @@ export function NewNoteCard({onNoteCreated}: newNoteCardProps){
           '>
             <X className='size-5' />
           </Dialog.Close>
-          <form className="flex flex-1 flex-col">
+          <form onSubmit={handleSaveNote} className="flex flex-1 flex-col">
             <div className='flex flex-1 flex-col gap-3 p-5'>
               <span className='text-sm font-medium text-slate-300'>
                 Adicionar nota
@@ -113,22 +79,15 @@ export function NewNoteCard({onNoteCreated}: newNoteCardProps){
               }
             </div>
             {isRecording?(
-              <button
-                onClick={handleStopRecording}
-                type='button' className='
+              <button type='button' className='
                 w-full bg-slate-900 py-4 text-center text-sm text-slate-300
-                outline-none font-medium hover:text-slate-100 flex items-center
-                justify-center gap-2
+                outline-none font-medium hover:text-slate-100
               '>
-                <div className='size-3 rounded-full bg-red-500 animate-pulse' />
                 Gravando! (clique p/ interronper)
               </button>
 
             ):(
-              <button
-                onClick={handleSaveNote}
-                type='button' 
-                className='
+              <button type='button' className='
                 w-full bg-lime-400 py-4 text-center text-sm text-lime-950
                 outline-none font-medium hover:bg-lime-500
               '>

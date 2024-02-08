@@ -5,7 +5,6 @@ import { toast } from 'sonner';
 interface newNoteCardProps{
   onNoteCreated: (content: string) => void
 }
-let speedRecognition: SpeechRecognition | null = null
 export function NewNoteCard({onNoteCreated}: newNoteCardProps){
   const [shouldShowOnboarding, setShouldShowOnboarnig] = useState(true)
   const [isRecording, setIsRecording] = useState(false)
@@ -29,7 +28,7 @@ export function NewNoteCard({onNoteCreated}: newNoteCardProps){
     setShouldShowOnboarnig(true)
     toast.success('Nota salva com sucesso!')
   }
-  
+
   function handleStartRecording(){
     const isSpeechRecognitionAPIAvailable = 'SpeechRecognition' in window ||
     'webkitSpeechRecognition' in window;
@@ -41,7 +40,7 @@ export function NewNoteCard({onNoteCreated}: newNoteCardProps){
     setShouldShowOnboarnig(false)
     const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition
     
-    speedRecognition = new SpeechRecognitionAPI()
+    const speedRecognition = new SpeechRecognitionAPI()
     speedRecognition.lang = 'pt-BR' || 'en-US'
     speedRecognition.continuous = true
     speedRecognition.maxAlternatives = 1
@@ -56,14 +55,16 @@ export function NewNoteCard({onNoteCreated}: newNoteCardProps){
 
     speedRecognition.onerror = (event) => console.error(event);
     speedRecognition.start()
+
+
+
+  
   }
 
 
   function handleStopRecording(){
     setIsRecording(false)
-    if (speedRecognition !== null) {
-      speedRecognition.stop()      
-    }
+    //speedRecognition.stop()
   }
 
   return(
