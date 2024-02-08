@@ -32,7 +32,7 @@ export function NoteCard({note}:NoteCardProps) {
       <Dialog.Portal>
         <Dialog.Overlay className='inset-0 fixed bg-black/50' />
         <Dialog.Content className='
-          fixed inset-0 md:inset-auto md:-translate-x-1/2 md:left-1/2 md:top-1/2 md:-translate-y-1/2
+          fixed md:-translate-x-1/2 md:left-1/2 md:top-1/2 md:-translate-y-1/2
           bg-slate-700 md:max-w-[650px] w-full flex flex-col md:rounded-md 
           outline-none overflow-hidden md:h-[60vh]
         '>

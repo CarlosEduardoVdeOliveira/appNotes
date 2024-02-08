@@ -79,8 +79,8 @@ export function NewNoteCard({onNoteCreated}: newNoteCardProps){
       <Dialog.Portal>
         <Dialog.Overlay className='inset-0 fixed bg-black/50' />
         <Dialog.Content className='
-          fixed inset-0 md:inset-auto md:-translate-x-1/2 md:left-1/2 md:top-1/2 md:-translate-y-1/2
-          md:max-w-[650px] md:h-[60vh] bg-slate-700 w-full flex flex-col md:rounded-md 
+          fixed inset-0 md:-translate-x-1/2 md:left-1/2 md:top-1/2 md:-translate-y-1/2
+          md:max-w-[650px] md:h-[60vh] bg-slate-700 w-full flex flex-col rounded-md 
           outline-none overflow-hidden
         '>
           <Dialog.Close className='
